@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import { useSpotifyAuth } from './hooks/useSpotifyAuth';
+import TurntablePage from './pages/TurntablePage';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { token, isAuthenticated, login, logout, user } = useSpotifyAuth();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <h1 style={{ margin: 0 }}>Digital Vinyl — Shelf</h1>
+        <div>
+          {!isAuthenticated ? (
+            <button onClick={login} className="mui-btn">Login Spotify</button>
+          ) : (
+            <>
+              <span style={{ marginRight: 12 }}>{user?.display_name || 'Signed in'}</span>
+              <button onClick={logout} className="mui-btn">Logout</button>
+            </>
+          )}
+        </div>
+      </Box>
 
-export default App
+      <TurntablePage token={token} isAuthenticated={isAuthenticated} />
+    </Container>
+  );
+}
