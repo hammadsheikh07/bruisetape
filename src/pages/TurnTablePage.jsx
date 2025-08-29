@@ -6,7 +6,7 @@ import Shelf from '../components/Shelf/Shelf';
 import SpotifySearch from '../components/Search/SpotifySearch';
 import { Box } from '@mui/material';
 
-export default function TurntablePage({ token, isAuthenticated }) {
+export default function TurnTablePage({ token, isAuthenticated }) {
   const [shelf, setShelf] = useState(() => {
     try { return JSON.parse(localStorage.getItem('dv_shelf') || '[]'); } catch(e) { return []; }
   });

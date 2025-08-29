@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { useSpotifyAuth } from './hooks/useSpotifyAuth';
-import TurntablePage from './pages/TurntablePage';
+import TurnTablePage from './pages/TurnTablePage';
 
 export default function App() {
   const { token, isAuthenticated, login, logout, user } = useSpotifyAuth();
@@ -23,7 +23,7 @@ export default function App() {
         </div>
       </Box>
 
-      <TurntablePage token={token} isAuthenticated={isAuthenticated} />
+      <TurnTablePage token={token} isAuthenticated={isAuthenticated} />
     </Container>
   );
 }
